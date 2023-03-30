@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CommodityMapper">
+    <!--查找所有商品-->
+    <select id="findCommodity" resultType="com.example.demo.entity.Commodity">
+        select * from commodity
+    </select>
+
+    <!--根据商品名模糊查找商品-->
+    <select id="findCname" resultType="com.example.demo.entity.Commodity">
+        select * from commodity
+        <where>
+            <if test="cname != null and cname != ''">
+                and cname like concat("%", #{cname}, "%")
+            </if>
+            <if test="cjude != null and cjude != ''">
+                and cjude = #{cjude}
+            </if>
+        </where>
+    </select>
+
+    <select id="byName" resultType="com.example.demo.entity.Commodity">
+        select * from commodity where cname = #{cname}
+    </select>
+
+    <!--修改状态-->
+    <update id="changeCjude">
+        update commodity set cjude = #{cjude} where cid =#{cid}
+    </update>
+
+    <insert id="save" parameterType="com.example.demo.entity.Commodity">
+        insert into commodity(cname,cprice,cnumber) values(#{cname},#{cprice},#{cnumber})
+    </insert>
+
+    <update id="update" parameterType="com.example.demo.entity.Commodity">
+        update commodity set cname = #{cname}, cprice = #{cprice}, cnumber = #{cnumber} where cid = #{cid}
+    </update>
+</mapper>

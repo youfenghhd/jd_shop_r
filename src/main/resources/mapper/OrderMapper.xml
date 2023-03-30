@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.OrderMapper">
+    <select id="getAll" resultType="java.util.Map">
+        select orderinfo.uid,orderinfo.cid,cname,otime,oaddress,cprice,cinfo,cnumber,image,oprice
+        from orderinfo,orders,commodity where
+        orderinfo.cid=orders.cid and orderinfo.cid=commodity.cid and orderinfo.uid=#{uid} group by orderinfo.cid
+    </select>
+    <insert id="addInfo">
+        insert into orders(uid,cid,otime,oprice) valuse(#{uid},#{cid},#{otime},#{oprice})
+    </insert>
+    <delete id="deleteInfo" parameterType="Integer">
+        delete from orders where cid=#{cid}
+    </delete>
+</mapper>

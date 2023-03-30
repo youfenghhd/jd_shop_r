@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CartMapper">
+    <select id="getAll" resultType="java.util.Map">
+        select * from cart,commodity where cart.cid=commodity.cid
+    </select>
+    <insert id="addInfo">
+        insert into cart(cid,uid,catime,cname,canumber) values(#{cid},#{uid},#{catime},#{cname},#{canumber})
+    </insert>
+    <delete id="deleteInfo" parameterType="Integer">
+        delete from cart where caid=#{caid}
+    </delete>
+</mapper>
